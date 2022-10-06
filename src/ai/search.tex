@@ -1,0 +1,99 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+
+\title{AI Search}
+\author{Tristan Slater}
+
+\begin{document}
+    \maketitle
+
+    \tableofcontents
+
+    \section{Defining Search Problems}
+
+    \begin{enumerate}
+        \item Initial state
+        \item Successor
+        \item Goal test
+        \item Step cost
+    \end{enumerate}
+
+    \subsection{Successor Function}
+
+    Tells us where we can go from a state: \begin{equation}
+        S(s_0) = \{(a_1, s_1), ..., (a_n, s_n)\}
+    \end{equation}
+
+    When actions are inferrable from states: \begin{equation}
+        S(s_0) = \{s_1, ..., s_n\}
+    \end{equation}
+
+    \subsection{Goal Test Function}
+
+    Tells when solution has been reached. \textbf{Explicit} defines which state is a goal. \textbf{Implicit} is some set of conditions that could happen at various states under various conditions.
+
+    \subsection{Step Cost Function}
+
+    Tells how much a single step costs: \begin{equation}
+        c(s_1, a, s_2) \geq 0
+    \end{equation}
+
+    \subsection{Solution}
+
+    Any path from initial state to goal state: $$\{a_1, ..., a_n\}$$
+    
+    When actions are inferrable from states: $$\{s_1, ..., s_n\}$$
+
+    \section{Basic Search}
+
+    A \textbf{node} is an abstract data structure that contains information about a state, parent node, action, path cost, and depth (optional).
+
+    The \textbf{frontier} is the collection of nodes that have been \textit{generated}, but \textit{not expanded}.
+
+    \begin{table}[h]
+        \caption{Comparison of Basic Search Strategies}
+        \label{tab:basic-search-comparison}
+        \centering
+        \begin{threeparttable}
+            \begin{tabular}{lccc}
+                \toprule
+                & BFS & UCS & DFS \\
+                \midrule
+                Node ADS & Queue & Min queue\tnote{3} & Stack \\
+                Nodes to Expand First & Shallowest & Cheapest & Deepest \\
+                Complete? & Yes\tnote{1} & Yes\tnote{4} & No \\
+                Optimal? & Yes\tnote{2} & Yes & No \\
+                Time Complexity & $O(b^{d + 1})$ & $O(b^{\lceil C^*/\varepsilon\rceil})$\tnote{5} & $O(b^m)$ \\
+                Space Complexity & $O(b^{d + 1})$ & $O(b^{\lceil C^*/\varepsilon\rceil})$ & $O(bm)$ \\
+                \bottomrule
+            \end{tabular}
+            \begin{tablenotes}
+                \item[1] If $b$ infinite
+                \item[2] If step costs equal
+                \item[3] Path cost
+                \item[4] If step cost $>0$
+                \item[5] $C^*$ cost of solution
+            \end{tablenotes}
+        \end{threeparttable}
+    \end{table}
+
+    \textbf{DLS} is exactly like DFS except with the depth limited.
+
+    \textbf{IDS} is exactly like DLS except it tries all depths starting at 0.
+    
+    IDS is \textit{complete}.
+    
+    IDS is \textit{optimal} if the step cost is 1.
+    
+    \section{Informed Search}
+
+    \subsection{Best-First Search}
+
+    \subsection{A\texorpdfstring{\textsuperscript{*}}{ Star}}
+
+    \subsection{Heuristics}
+\end{document}
